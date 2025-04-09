@@ -15,7 +15,17 @@ export const useTodos = () => {
     }
   };
 
+  const toggleTodo = (id: number) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
+  };
+
   return {
     addTodo,
+    todos,
+    toggleTodo,
   };
 };
