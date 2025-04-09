@@ -8,6 +8,7 @@ export interface Todo {
 
 export const useTodos = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
+  const [filter, setFilter] = useState<"all" | "active" | "completed">("all");
 
   const addTodo = (text: string) => {
     if (text.trim()) {
@@ -23,9 +24,26 @@ export const useTodos = () => {
     );
   };
 
+  const clearCompleted = () => {
+    setTodos(todos.filter((todo) => !todo.completed));
+  };
+
+  const filteredTodos = todos.filter((todo) => {
+    if (filter === "active") return !todo.completed;
+    if (filter === "completed") return todo.completed;
+    return true;
+  });
+
+  const activeTodosCount = todos.filter((todo) => !todo.completed).length;
+
   return {
+    todos: filteredTodos,
     addTodo,
-    todos,
     toggleTodo,
+    clearCompleted,
+    setFilter,
+    activeTodosCount,
+    filter,
+    allTodos: todos,
   };
 };
