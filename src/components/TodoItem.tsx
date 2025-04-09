@@ -8,8 +8,11 @@ interface TodoItemProps {
 
 export const TodoItem: React.FC<TodoItemProps> = ({ todo, onToggle }) => {
   return (
-    <div className={`todo-item ${todo.completed ? "completed" : ""}`}>
-      <span onClick={() => onToggle(todo.id)}>
+    <div
+      className={`todo-item ${todo.completed ? "completed" : ""}`}
+      onClick={() => onToggle(todo.id)}
+    >
+      <span>
         {todo.completed ? "✓" : "○"} {todo.text}
       </span>
     </div>
